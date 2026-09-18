@@ -1,0 +1,762 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil | Benedita Tech</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --roxo: #5A1ED6;
+            --roxo-claro: #ede9fe;
+            --roxo-escuro: #5b21b6;
+            --fundo:linear-gradient(125deg,#3f0fa0 0%,var(--roxo) 45%,#a36eff 100%);;
+            --bege:#F3E7D2;;
+            --texto: #252235;
+            --cinza: #6f6a7d;
+            --borda: #000000;
+            --verde: #22c55e;
+            --marrom: #B8834E;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--fundo);
+            color: var(--texto);
+        }
+   
+        header {
+    background: #5F23D8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 40px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(90, 30, 214, .3);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-icon {
+    color: var(--marrom);
+    font-size: 1.3rem;
+    animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.logo span:not(.logo-icon) {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.50rem;
+    color: #ffffff;
+
+}
+
+        main {
+            width: min(1100px, calc(100% - 40px));
+            margin: 35px auto;
+        }
+
+        .perfil {
+            background: var(--bege);
+            border: 1px solid var(--borda);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+
+        .perfil-topo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .avatar {
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            background: var(--roxo-claro);
+            border: 4px solid var(--roxo-claro);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .perfil-info h1 {
+            font-size: 1.6rem;
+            margin-bottom: 7px;
+        }
+
+        .perfil-info p {
+            color: var(--cinza);
+            font-size: 0.95rem;
+        }
+
+        .perfil-secao {
+            border-top: 1px solid var(--borda);
+            padding-top: 22px;
+            margin-top: 22px;
+        }
+
+        .perfil-secao h2,
+        .agenda h2 {
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+        }
+
+        .selos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .selo {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: var(--roxo-claro);
+            color: var(--roxo-escuro);
+            font-size: 0.86rem;
+            font-weight: 600;
+        }
+
+        .artigos {
+            display: grid;
+            gap: 12px;
+        }
+
+        .artigo {
+            border: 1px solid var(--borda);
+            border-radius: 13px;
+            padding: 15px;
+            background: #fcfbff;
+        }
+
+        .artigo h3 {
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+
+        .artigo p {
+            color: var(--cinza);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .perfil-secao textarea {
+            width: 100%;
+            min-height: 150px;
+            resize: vertical;
+            border: 1px solid var(--borda);
+            border-radius: 13px;
+            padding: 14px;
+            font: inherit;
+            color: var(--texto);
+            background: #fcfbff;
+            outline: none;
+    }
+
+        .perfil-secao textarea:focus {
+            border-color: var(--roxo);
+            box-shadow: 0 0 0 3px var(--roxo-claro);
+    
+    }
+
+        .agenda {
+            background: var(--bege);
+            border: 1px solid var(--borda);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 24px;
+    }
+
+        .agenda h2 {
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+        }
+
+        .agenda textarea {
+            width: 100%;
+            min-height: 190px;
+            resize: vertical;
+            border: 1px solid var(--borda);
+            border-radius: 13px;
+            padding: 14px;
+            font: inherit;
+            color: var(--texto);
+            background: #fcfbff;
+            outline: none;
+        }
+
+        .agenda textarea:focus {
+            border-color: var(--roxo);
+            box-shadow: 0 0 0 3px var(--roxo-claro);
+        }
+
+        .agenda-acoes {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 12px;
+        }
+
+        .btn {
+            border: 0;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-destaque {
+            background: var(--roxo);
+            color: white;
+        }
+
+        .btn-destaque:hover {
+            background: var(--roxo-escuro);
+        }
+
+        .selos-area {
+            background: var(--bege);
+            border: 1px solid var(--borda);
+            border-radius: 20px;
+            padding: 28px;
+        }
+
+        .selos-area > p {
+            color: var(--cinza);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .selos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .selo-opcao {
+            position: relative;
+        }
+
+        .selo-opcao input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .selo-opcao label {
+            min-height: 95px;
+            border: 2px solid var(--borda);
+            border-radius: 14px;
+            background: #fcfbff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            text-align: center;
+            padding: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .selo-opcao label:hover {
+            border-color: var(--roxo);
+            transform: translateY(-1px);
+        }
+
+        .selo-opcao input:checked + label {
+            border-color: var(--roxo);
+            background: var(--roxo-claro);
+            color: var(--roxo-escuro);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+        }
+
+        .selo-icone {
+            font-size: 1.7rem;
+        }
+
+        .selo-nome {
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .selos-acoes {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 18px;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--cinza);
+            font-size: 0.82rem;
+            padding: 25px;
+        }
+
+        @media (max-width: 650px) {
+            header {
+                padding: 16px 20px;
+            }
+
+            main {
+                width: min(100% - 24px, 1100px);
+                margin: 20px auto;
+            }
+
+            .perfil,
+            .agenda,
+            .selos-area {
+                padding: 20px;
+            }
+
+            .perfil-topo {
+                align-items: flex-start;
+            }
+
+            .avatar {
+                width: 72px;
+                height: 72px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <span class="logo-icon">✦</span>
+            <span>Benedita Tech</span>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- PERFIL -->
+        <section class="perfil" id="secaoPerfil">
+
+            <div class="perfil-topo">
+                <div class="avatar" id="avatarEl">
+                    <img src="https://via.placeholder.com/92" alt="Foto do usuário">
+                </div>
+
+                <div class="perfil-info">
+                    <h1 id="perfilNome">Nome do usuário</h1>
+                    <p id="perfilEmail">usuario@email.com</p>
+                </div>
+            </div>
+
+            <div class="perfil-secao">
+                <h2>🏷️ Meus selos</h2>
+
+                <div class="selos" id="perfilSelos">
+                    <span class="selo">📐 Matemática</span>
+                    <span class="selo">📖 Português</span>
+                </div>
+            </div>
+
+            <div class="perfil-secao">
+                <h2>📝 Meus artigos</h2>
+
+                <div class="artigos" id="perfilArtigos">
+
+                    <article class="artigo">
+                        <h3>Exemplo de artigo publicado</h3>
+                        <p>Os artigos publicados pelo usuário aparecerão nesta área.</p>
+                    </article>
+
+                </div>
+            </div>
+
+            <div class="perfil-secao">
+                <h2>📒 Minha agenda</h2>
+            
+                <textarea
+                    id="perfilNotesTextarea"
+                    placeholder="Lembretes, tarefas, metas de estudo..."
+                ></textarea>
+            </div>
+
+        </section>
+
+        <!-- AGENDA -->
+        <section class="agenda" id="secaoAgenda">
+                <h2>📝 Anotações</h2>
+            
+                <textarea
+                    id="notesTextarea"
+                    placeholder="Lembretes, tarefas, metas de estudo..."
+                ></textarea>
+            
+                <div class="agenda-acoes">
+                    <button class="btn btn-destaque" id="saveNotesBtn" type="button">
+                        Salvar agenda
+                    </button>
+                </div>
+            
+        </section>
+
+        <!-- SELOS -->
+        <section class="selos-area" id="secaoSelos">
+
+            <h2>🏷️ Selos de matérias</h2>
+
+            <p>
+                Escolha as matérias que você estuda. Elas aparecem no seu perfil.
+            </p>
+
+            <div class="selos-grid" id="selosGrid">
+
+                <div class="selo-opcao">
+                    <input type="checkbox" id="seloMatematica" name="selos">
+                    <label for="seloMatematica">
+                        <span class="selo-icone">📐</span>
+                        <span class="selo-nome">Matemática</span>
+                    </label>
+                </div>
+
+                <div class="selo-opcao">
+                    <input type="checkbox" id="seloPortugues" name="selos">
+                    <label for="seloPortugues">
+                        <span class="selo-icone">📖</span>
+                        <span class="selo-nome">Português</span>
+                    </label>
+                </div>
+
+                <div class="selo-opcao">
+                    <input type="checkbox" id="seloCiencias" name="selos">
+                    <label for="seloCiencias">
+                        <span class="selo-icone">🔬</span>
+                        <span class="selo-nome">Ciências</span>
+                    </label>
+                </div>
+
+                <div class="selo-opcao">
+                    <input type="checkbox" id="seloHistoria" name="selos">
+                    <label for="seloHistoria">
+                        <span class="selo-icone">🏛️</span>
+                        <span class="selo-nome">História</span>
+                    </label>
+                </div>
+
+                <div class="selo-opcao">
+                    <input type="checkbox" id="seloGeografia" name="selos">
+                    <label for="seloGeografia">
+                        <span class="selo-icone">🌎</span>
+                        <span class="selo-nome">Geografia</span>
+                    </label>
+                </div>
+
+                <div class="selo-opcao">
+                    <input type="checkbox" id="seloFisica" name="selos">
+                    <label for="seloFisica">
+                        <span class="selo-icone">⚛️</span>
+                        <span class="selo-nome">Física</span>
+                    </label>
+                </div>
+
+                <div class="selo-opcao">
+                    <input type="checkbox" id="seloQuimica" name="selos">
+                    <label for="seloQuimica">
+                        <span class="selo-icone">🧪</span>
+                        <span class="selo-nome">Química</span>
+                    </label>
+                </div>
+
+                <div class="selo-opcao">
+                    <input type="checkbox" id="seloBiologia" name="selos">
+                    <label for="seloBiologia">
+                        <span class="selo-icone">🧬</span>
+                        <span class="selo-nome">Biologia</span>
+                    </label>
+                </div>
+
+                <div class="selo-opcao">
+                    <input type="checkbox" id="seloIngles" name="selos">
+                    <label for="seloIngles">
+                        <span class="selo-icone">🇬🇧</span>
+                        <span class="selo-nome">Inglês</span>
+                    </label>
+                </div>
+
+                <div class="selo-opcao">
+                    <input type="checkbox" id="seloFilosofia" name="selos">
+                    <label for="seloFilosofia">
+                        <span class="selo-icone">💭</span>
+                        <span class="selo-nome">Filosofia</span>
+                    </label>
+                </div>
+
+                <div class="selo-opcao">
+                    <input type="checkbox" id="seloSociologia" name="selos">
+                    <label for="seloSociologia">
+                        <span class="selo-icone">👥</span>
+                        <span class="selo-nome">Sociologia</span>
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="selos-acoes">
+                <button class="btn btn-destaque" id="btnSalvarSelos">
+                    💾 Salvar selos
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        © 2026 Benedita Tech — Feito para estudantes.
+    </footer>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+const FIREBASE_CONFIG = {
+    apiKey: "AIzaSyAMDzDLNo3_RZWnue_mDMy9rtc8bcb9OxM",
+    authDomain: "plataformatech.firebaseapp.com",
+    projectId: "plataformatech",
+    storageBucket: "plataformatech.firebasestorage.app",
+    messagingSenderId: "256905261473",
+    appId: "1:256905261473:web:6eb3d374d721c476899be0"
+};
+
+firebase.initializeApp(FIREBASE_CONFIG);
+
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+auth.onAuthStateChanged(async (user) => {
+
+    if (!user) {
+        document.getElementById('perfilNome').textContent = 'Não conectado';
+        document.getElementById('perfilEmail').textContent = 'Entre na sua conta para acessar seu perfil';
+        return;
+    }
+
+    // NOME
+    const nome = user.displayName || user.email?.split('@')[0] || 'Usuário';
+
+    document.getElementById('perfilNome').textContent = nome;
+    document.getElementById('perfilEmail').textContent = user.email || '';
+
+    // FOTO
+    const avatar = document.getElementById('avatarEl');
+
+    if (user.photoURL) {
+        avatar.innerHTML = `
+            <img src="${user.photoURL}" alt="Foto do usuário">
+        `;
+    } else {
+        avatar.textContent = nome.charAt(0).toUpperCase();
+    }
+
+    // CARREGAR SELOS
+    carregarSelos(user.uid);
+
+    // CARREGAR ARTIGOS
+    carregarArtigosDoUsuario(user.uid);
+
+    // CARREGAR AGENDA
+    carregarAgenda(user.uid);
+});
+
+
+// =============================
+// SELOS
+// =============================
+
+async function carregarSelos(uid) {
+
+    const container = document.getElementById('perfilSelos');
+
+    try {
+
+        const doc = await db
+            .collection('usuarios')
+            .doc(uid)
+            .get();
+
+        if (doc.exists) {
+
+            const selos = doc.data().selos || [];
+
+            if (selos.length) {
+
+                container.innerHTML = selos.map(selo => `
+                    <span class="selo">🏷️ ${selo}</span>
+                `).join('');
+
+            } else {
+
+                container.innerHTML = `
+                    <span class="selo">Nenhum selo ainda</span>
+                `;
+            }
+
+        } else {
+
+            container.innerHTML = `
+                <span class="selo">Nenhum selo ainda</span>
+            `;
+        }
+
+    } catch (erro) {
+
+        console.error('Erro ao carregar selos:', erro);
+
+    }
+}
+
+
+// =============================
+// ARTIGOS DO USUÁRIO
+// =============================
+
+async function carregarArtigosDoUsuario(uid) {
+
+    const container = document.getElementById('perfilArtigos');
+
+    try {
+
+        const snap = await db
+            .collection('artigos')
+            .where('uid', '==', uid)
+            .get();
+
+        if (snap.empty) {
+
+            container.innerHTML = `
+                <article class="artigo">
+                    <h3>Nenhum artigo publicado</h3>
+                    <p>Os artigos publicados por você aparecerão aqui.</p>
+                </article>
+            `;
+
+            return;
+        }
+
+        const artigos = snap.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+
+        container.innerHTML = artigos.map(artigo => `
+            <article class="artigo">
+
+                <h3>${escaparHTML(artigo.titulo || 'Sem título')}</h3>
+
+                <p>
+                    ${escaparHTML(
+                        artigo.descricao || 'Sem descrição'
+                    )}
+                </p>
+
+            </article>
+        `).join('');
+
+    } catch (erro) {
+
+        console.error('Erro ao carregar artigos:', erro);
+
+        container.innerHTML = `
+            <article class="artigo">
+                <h3>Erro ao carregar artigos</h3>
+                <p>Não foi possível buscar seus artigos.</p>
+            </article>
+        `;
+    }
+}
+
+
+// =============================
+// AGENDA
+// =============================
+
+async function carregarAgenda(uid) {
+
+    const textarea = document.getElementById('perfilNotesTextarea');
+
+    if (!textarea) return;
+
+    try {
+
+        const doc = await db
+            .collection('agendas')
+            .doc(uid)
+            .get();
+
+        if (doc.exists) {
+
+            textarea.value = doc.data().notas || '';
+
+        }
+
+    } catch (erro) {
+
+        console.error('Erro ao carregar agenda:', erro);
+
+    }
+}
+
+
+// =============================
+// SEGURANÇA DO TEXTO
+// =============================
+
+function escaparHTML(texto) {
+
+    return String(texto)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+
+}
+</script>
+
+</body>
+</html>
+

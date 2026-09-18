@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benedita Tech | Início</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+</head>
+<body>
+
+<div id="toast" role="alert" aria-live="polite"></div>
+
+<!-- ═══════════════ LANDING ═══════════════ -->
+<div id="landingPage">
+    <div class="landing-container">
+        <div class="landing-card">
+            <div class="hero-landing">
+                <div class="logo-landing">
+                    <span class="logo-icon-land">⚡</span>
+                    <h2>Benedita Tech</h2>
+                </div>
+                <h1>Estude, compartilhe e <em>transforme</em><br>o seu futuro</h1>
+                <p>Uma comunidade vibrante onde estudantes publicam resumos, artigos e se ajudam a conquistar notas incríveis.</p>
+                <button id="enterPlatformBtn" class="btn-entrar">🚀 Explorar plataforma →</button>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item"><div class="feature-icon">📘</div><h3>+1.200 Artigos</h3><p>Conteúdo colaborativo de estudantes para estudantes.</p></div>
+                <div class="feature-item"><div class="feature-icon">🏆</div><h3>Rankings & Metas</h3><p>Acompanhe seu progresso e incentive colegas.</p></div>
+                <div class="feature-item"><div class="feature-icon">💬</div><h3>Comunidade Ativa</h3><p>Comentários, dicas e suporte em todas as matérias.</p></div>
+            </div>
+            <div class="testimonials">
+                <h3>💜 O que dizem por aqui</h3>
+                <p class="quote">"A Benedita Tech me ajudou a passar no vestibular com resumos incríveis de matemática!" — Marina R.</p>
+                <p class="quote">"Publiquei meus resumos de história e recebi feedbacks que me fizeram evoluir demais." — João P.</p>
+            </div>
+            <div class="footer-landing"><p>© 2026 Benedita Tech — conhecimento livre e colaborativo</p></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ PLATAFORMA ═══════════════ -->
+<div id="platformPage">
+
+    <header>
+        <div class="logo">
+            <span class="logo-icon" aria-hidden="true">✦</span>
+            <h1>Benedita Tech</h1>
+        </div>
+        <div class="header-actions">
+            <div class="search-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="search" id="searchInput" placeholder="Buscar artigos, matérias, tags…" aria-label="Buscar artigos">
+            </div>
+            <button class="btn btn-header btn-sm" id="publishBtn" style="display:none">+ Publicar</button>
+            <button class="btn btn-header btn-sm" id="btnHeaderLogin">Entrar</button>
+            <button class="btn btn-header btn-sm" id="btnHeaderLogout" style="display:none">Sair</button>
+        </div>
+    </header>
+
+    <section class="hero" aria-label="Destaque">
+        <div class="hero-content">
+            <span class="hero-eyebrow">Plataforma de Estudos</span>
+            <h2 class="hero-title">Aprenda e compartilhe<br><em>conhecimento</em> com todos</h2>
+            <p class="hero-sub">Uma comunidade colaborativa onde estudantes publicam resumos, dicas e artigos.</p>
+        </div>
+        <div class="hero-stats">
+            <div class="stat"><span class="stat-num" id="statArtigos">…</span><span class="stat-label">Artigos</span></div>
+            <div class="stat"><span class="stat-num">340</span><span class="stat-label">Autores</span></div>
+            <div class="stat"><span class="stat-num">8.5k</span><span class="stat-label">Leituras</span></div>
+        </div>
+    </section>
+
+    <main>
+        <aside class="sidebar">
+
+            <!-- Perfil (só logado) -->
+            <section id="secaoPerfil" class="perfil hidden">
+                <div class="avatar-wrap">
+                    <div class="avatar" id="avatarEl">?</div>
+                    <span class="avatar-badge" title="Online"></span>
+                </div>
+                <div class="perfil-info">
+                    <h2 id="perfilNome">—</h2>
+                    <span class="usuario-email" id="perfilEmail">—</span>
+                </div>
+                <!-- Selos de matérias do usuário -->
+                <div class="perfil-selos" id="perfilSelos"></div>
+                
+            </section>
+
+            <!-- Aviso para não logados -->
+            <section id="secaoGuestAviso" class="guest-aviso">
+                <strong>👋 Bem-vinda!</strong>
+                Entre na sua conta para publicar artigos, curtir, comentar e salvar suas anotações.
+                <button class="btn btn-destaque btn-sm" onclick="abrirModalLogin()">Entrar / Criar conta</button>
+            </section>
+
+            <!-- Agenda (só logado) -->
+            <section id="secaoAgenda" class="agenda hidden">
+                <h3>📝 Anotações</h3>
+                <textarea id="notesTextarea" placeholder="Lembretes, tarefas, metas de estudo…"></textarea>
+                <button class="btn btn-destaque btn-sm" id="saveNotesBtn">Salvar agenda</button>
+            </section>
+
+            <section class="sidebar-actions">
+                <button class="btn" id="configMockBtn">⚙️ Configurações</button>
+            </section>
+        </aside>
+
+        <section class="feed-artigos">
+            <div class="feed-header">
+                <h2 class="feed-titulo">Artigos Recentes</h2>
+            </div>
+            <div id="articlesContainer">
+                <div class="feed-loading"><div class="spinner"></div><p>Carregando artigos…</p></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Benedita Tech — Feito com 💜 para estudantes. <a href="#">Termos</a> · <a href="#">Privacidade</a></p>
+    </footer>
+</div>
+
+<!-- ═══════════════ MODAL LOGIN ═══════════════ -->
+<div id="modalLoginOverlay" class="modal-overlay">
+    <div class="modal modal-login">
+        <div class="modal-header">
+            <h2 id="loginTituloTexto">👋 Entrar na conta</h2>
+            <button class="modal-close" id="modalLoginClose">✕</button>
+        </div>
+        <input type="checkbox" id="loginModoCadastro" style="display:none">
+        <button class="btn-google" id="btnLoginGoogle">
+            <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.08 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-3.59-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+            Continuar com Google
+        </button>
+        <div class="divisor-login">ou</div>
+        <div id="loginErro" class="erro-login hidden"></div>
+        <form id="formLogin" novalidate style="display:flex;flex-direction:column;gap:12px">
+            <div class="input-wrap">
+                <label class="input-label" for="loginEmail">E-mail <span class="obrigatorio">*</span></label>
+                <input id="loginEmail" type="email" class="input-base" placeholder="seu@email.com" required>
+            </div>
+            <div class="input-wrap">
+                <label class="input-label" for="loginSenha">Senha <span class="obrigatorio">*</span></label>
+                <input id="loginSenha" type="password" class="input-base" placeholder="Mínimo 6 caracteres" required>
+            </div>
+            <button type="submit" class="btn btn-destaque" style="width:100%">
+                <span id="loginBtnTexto">Entrar</span>
+            </button>
+        </form>
+        <p style="text-align:center;font-size:0.83rem;color:var(--cinza)">
+            <button class="link-btn" id="toggleModoLogin">Criar conta</button>
+        </p>
+    </div>
+</div>
+
+<!-- ═══════════════ MODAL PUBLICAR ═══════════════ -->
+<div id="modalOverlay" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>✍️ Publicar Artigo</h2>
+            <button class="modal-close" id="modalClose">✕</button>
+        </div>
+        <p style="font-size:0.85rem;color:var(--cinza)">Seu artigo vai direto para o feed e para o banco de dados.</p>
+        <form id="formPublicar" novalidate>
+            <div class="modal-grid">
+                <div class="input-wrap modal-full">
+                    <label class="input-label" for="inputTitulo">Título <span class="obrigatorio">*</span></label>
+                    <input id="inputTitulo" type="text" class="input-base" placeholder="Ex: Guia completo de funções do 2º grau" required maxlength="120">
+                </div>
+                <div class="input-wrap">
+                    <label class="input-label" for="inputMateria">Matéria <span class="obrigatorio">*</span></label>
+                    <select id="inputMateria" class="input-base" required>
+                        <option value="">Selecione…</option>
+                        <option>Matemática</option><option>Português</option>
+                        <option>Ciências</option><option>História</option>
+                        <option>Geografia</option><option>Física</option>
+                        <option>Química</option><option>Biologia</option>
+                        <option>Inglês</option><option>Filosofia</option><option>Sociologia</option>
+                    </select>
+                </div>
+                <div class="input-wrap">
+                    <label class="input-label" for="inputAutor">Seu nome</label>
+                    <input id="inputAutor" type="text" class="input-base" placeholder="Ex: Ana Souza">
+                </div>
+                <div class="input-wrap modal-full">
+                    <label class="input-label" for="inputDescricao">Resumo <span class="obrigatorio">*</span></label>
+                    <textarea id="inputDescricao" class="textarea-base" placeholder="Escreva o resumo aqui…" required rows="3"></textarea>
+                </div>
+                <div class="input-wrap modal-full">
+                    <label class="input-label" for="inputConteudo">Conteúdo completo</label>
+                    <textarea id="inputConteudo" class="textarea-base" placeholder="Conteúdo que aparece ao clicar em 'Ler artigo'…" rows="6"></textarea>
+                </div>
+                <div class="input-wrap modal-full">
+                    <label class="input-label">Tags <span style="font-weight:400;color:var(--cinza)">(clique para adicionar)</span></label>
+                    <div class="tags-picker" id="tagsPicker"></div>
+                    <div class="tags-selecionadas" id="tagsSelecionadas">
+                        <span class="tags-placeholder">Nenhuma tag selecionada</span>
+                    </div>
+                    <input type="hidden" id="inputTags">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm" id="btnCancelar">Cancelar</button>
+                <button type="submit" class="btn btn-destaque btn-sm" id="btnPublicarSubmit">🚀 Publicar agora</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ═══════════════ MODAL COMENTAR ═══════════════ -->
+<div id="modalComentarioOverlay" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h2>💬 Comentários</h2>
+            <button class="modal-close" id="modalComentarioClose">✕</button>
+        </div>
+        <p id="modalComentarioTituloArtigo" style="font-size:0.85rem;color:var(--cinza);font-style:italic;border-left:3px solid var(--roxo);padding-left:10px"></p>
+        <div id="modalComentariosLista" style="display:flex;flex-direction:column;gap:10px;max-height:340px;overflow-y:auto;padding-right:4px"></div>
+        <div id="modalComentarioForm">
+            <!-- injetado pelo JS dependendo se está logado -->
+        </div>
+    </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
